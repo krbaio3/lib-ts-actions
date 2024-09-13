@@ -291,6 +291,11 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@codespartan/lib-ts-core@0.3.0":
+  version "0.3.0"
+  resolved "http://localhost:4873/@codespartan/lib-ts-core/-/lib-ts-core-0.3.0.tgz#0edd374189007ab5146fc5aaa9a48ccf230a3e26"
+  integrity sha512-SYv00ohKOAXsQAfkduhnkmaOlrrNBkmT97NnbFsHojxXRlLiWRqu3TIJz+zSg03gDuA4IjeQfeO9l3Sso9kJ0w==
+
 "@commitlint/cli@19.5.0":
   version "19.5.0"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-19.5.0.tgz#a6e2f7f8397ddf9abd5ee5870e30a1bf51b7be2b"

@@ -1,5 +1,5 @@
-import { GlobalResponseTypes } from '../send.types.ts';
-import { InputMiddleObject }   from './event-mediator.types.ts';
+import { GlobalResponseTypes } from '../send.types';
+import { InputMiddleObject } from './action-mediator.types';
 
 export abstract class ActionMediatorAbstract {
 	public abstract validaciones<T>(inputObject: InputMiddleObject): Promise<GlobalResponseTypes<T>>;

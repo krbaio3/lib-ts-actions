@@ -1,7 +1,8 @@
-import { GlobalResponseTypes, SendObject } from './types/send.types.ts';
-import { InputObjectNew }                  from '@lib/types/mediator/dll-mediator.types.ts';
+import { InputObjectNew } from './types/mediator/dll-mediator.types';
+import { GlobalResponseTypes, SendObject } from './types/send.types';
+import { SendAbstract } from './types/send.abstract';
 
-export class SendLibrary {
+export class SendLibrary extends SendAbstract {
 	public async sendProcess<T>(inputObject: SendObject): Promise<GlobalResponseTypes<T>> {
 		const { codApp, codTransaction } = inputObject;
 
@@ -9,13 +10,13 @@ export class SendLibrary {
 			CONTINUAR: ' ',
 		});
 
-		return await fetch(`${import.meta.env.VITE_API_URL}/schema/${codApp}/${codTransaction}`, {
+		return await fetch(`${this.apiUrl}/schema/${codApp}/${codTransaction}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body,
-		}).then((response) => response.json() as Promise<any>);
+		}).then((response) => response.json());
 	}
 
 	/**
@@ -34,12 +35,12 @@ export class SendLibrary {
 
 		//TODO: Llamada a la tabla de las dll para sacar la Dll a la que hay que llamar, ya que no coinciden las de nexoApi con la tabla Dll
 		//TODO: Ejecutar la Dll en el browser y devolver el resultado
-		return await fetch(`${import.meta.env.VITE_API_URL}/dll/${dllId}`, {
+		return await fetch(`${this.apiUrl}/dll/${dllId}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body,
-		}).then((response) => response.json() as Promise<any>);
+		}).then((response) => response.json());
 	}
 }
