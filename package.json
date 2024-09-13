@@ -1,9 +1,11 @@
 {
 	"name": "@codespartan/lib-ts-actions",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Librería que contiene las acciones para el proyecto M50 en Typescript",
+	"keywords": [],
+	"license": "ISC",
+	"author": "",
 	"type": "module",
-	"types": "dist/types/actions.d.ts",
 	"exports": {
 		".": {
 			"import": "./dist/actions.es.js",
@@ -12,6 +14,7 @@
 	},
 	"main": "dist/actions.cjs.js",
 	"module": "dist/actions.es.js",
+	"types": "dist/types/actions.d.ts",
 	"files": [
 		"dist",
 		"package.json"
@@ -28,20 +31,21 @@
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"preview": "vite preview",
+		"prepublish": "npm pack",
 		"release": "standard-version",
 		"release:major": "standard-version --release-as major",
 		"release:minor": "standard-version --release-as minor",
 		"release:patch": "standard-version --release-as patch",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"version": "npx conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
-		"prepublish": "npm pack"
+		"version": "npx conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
+	"dependencies": {
+		"@codespartan/lib-ts-core": "0.3.0"
+	},
 	"devDependencies": {
 		"@commitlint/cli": "19.5.0",
 		"@commitlint/config-conventional": "19.5.0",
+		"@commitlint/prompt-cli": "19.5.0",
 		"@eslint/js": "10.0.0",
 		"@stylistic/eslint-plugin": "2.8.0",
 		"@types/eslint": "9.6.1",
@@ -51,6 +55,9 @@
 		"@types/node": "22.5.4",
 		"@typescript-eslint/eslint-plugin": "8.5.0",
 		"@typescript-eslint/parser": "8.5.0",
+		"commitizen": "4.3.0",
+		"conventional-changelog": "6.0.0",
+		"conventional-changelog-cli": "5.0.0",
 		"eslint": "9.10.0",
 		"eslint-config-prettier": "9.1.0",
 		"eslint-config-xo": "0.46.0",
@@ -68,6 +75,7 @@
 		"rollup-plugin-dts": "6.1.1",
 		"sass": "1.78.0",
 		"semver": "7.6.3",
+		"standard-version": "9.5.0",
 		"ts-jest": "29.2.5",
 		"typescript": "5.6.2",
 		"typescript-eslint": "8.5.0",
@@ -82,8 +90,5 @@
 		"node": ">=18.0.0",
 		"npm": ">=9.0.0",
 		"yarn": ">=1.2.0"
-	},
-	"dependencies": {
-		"@codespartan/lib-ts-core": "0.3.0"
 	}
 }
