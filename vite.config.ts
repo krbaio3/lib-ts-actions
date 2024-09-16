@@ -8,11 +8,11 @@ export default defineConfig({
 			entry: path.resolve(__dirname, 'src/index.ts'),
 			name: packageJson.name,
 			formats: ['es', 'cjs'],
-			fileName: (format) => `core.${format}.js`,
+			fileName: (format) => `actions.${format}.js`,
 		},
 		rollupOptions: {
 			external: [],
 		},
-		minify: false,
-	}
+		minify: true,
+	},
 });

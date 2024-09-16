@@ -1,5 +1,5 @@
-import { DllMediatorAbstract } from './dll-mediator.abstract.ts';
-import { GlobalResponseTypes } from '../send.types.ts';
+import { DllMediatorAbstract } from './dll-mediator.abstract';
+import { GlobalResponseTypes } from '../send.types';
 
 export type InputObject = {
 	dllId: string | number;
@@ -13,8 +13,9 @@ export type MediatorMethodKeys = keyof DllMediatorAbstract;
 export type MediatorMethodFunction = <T>(inputObject: InputObject) => Promise<GlobalResponseTypes<T>>;
 
 export type InputObjectNew = {
-	method?: string;
 	dllId: string | number;
 	params: string;
+	apiUrl: string;
+	method?: string;
 	extraParams?: string;
 };

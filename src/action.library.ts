@@ -1,31 +1,25 @@
 // (dialogo_id = 2) AND (control_id = 1094) AND (secuencia_id = 7022)
 
-import { ActionObject, GlobalResponseTypes, SequenceForEvent } from './types/send.types.ts';
-import { ActionAbstract }                                      from './types/action.abstract.ts';
-import { debug }                                               from '@/core/logger.core.ts';
+import { ActionObject, GlobalResponseTypes, SequenceForEvent } from './types/send.types';
+import { ActionAbstract } from './types/action.abstract';
+import { debug, error } from '@codespartan/lib-ts-core';
 
 export class ActionLibrary extends ActionAbstract {
-	constructor() {
-		super();
-		this.validaciones = this.validaciones.bind(this);
-		this.accionesDialog = this.accionesDialog.bind(this);
-		this.eventosSec = this.eventosSec.bind(this);
-		this.funciones = this.funciones.bind(this);
+	constructor(apiUrl: string) {
+		super(apiUrl); // Se llama al constructor de la clase base. Si es necesrario, agregar más logica aquí. El constructor no se usa hasta que se llama a la clase.
 	}
 	public async validaciones<T>(eventObject: ActionObject): Promise<GlobalResponseTypes<T>> {
 		debug('validaciones: ', JSON.stringify(eventObject));
-		return Promise.resolve(eventObject as unknown as GlobalResponseTypes<T>);
+		return eventObject as unknown as GlobalResponseTypes<T>;
 	}
 	public async accionesDialog<T>(eventObject: ActionObject): Promise<GlobalResponseTypes<T>> {
 		debug('accionesDialog: ', JSON.stringify(eventObject));
 		const { funcionId, codTransaction, codApp } = eventObject;
-		return Promise.resolve(
-			_getAccionesDialogo<T>({
-				funcionId,
-				codTransaction: codTransaction as string,
-				codApp: codApp as string,
-			}),
-		);
+		return _getAccionesDialogo<T>({
+			funcionId,
+			codTransaction: codTransaction as string,
+			codApp: codApp as string,
+		});
 	}
 	public async eventosSec<T>(eventObject: ActionObject): Promise<GlobalResponseTypes<T>> {
 		//  {
@@ -38,14 +32,18 @@ export class ActionLibrary extends ActionAbstract {
 
 		const { secuenciaId, dialogoId, funcionId: nodoId } = eventObject;
 		debug('eventosSec: ', JSON.stringify(eventObject));
+		if (this.apiUrl === undefined) {
+			error('No se ha definido la URL de la API');
+			throw new Error('No se ha definido la URL de la API');
+		}
 
-		let result = await fetch(`${import.meta.env.VITE_API_URL}/evento/${secuenciaId}/${dialogoId}/${nodoId}`, {
+		const result = await fetch(`${this.apiUrl}/evento/${secuenciaId}/${dialogoId}/${nodoId}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-				Charset: 'UTF-8',
+				Charset: 'utf8',
 			},
-		}).then((response) => response.json() as Promise<any>);
+		}).then((response) => response.json());
 
 		result.data = result.data.map((item: SequenceForEvent) => ({
 			...item,
@@ -56,14 +54,18 @@ export class ActionLibrary extends ActionAbstract {
 		return result;
 	}
 	public async funciones<NexoApiObject>(eventObject: ActionObject): Promise<GlobalResponseTypes<NexoApiObject>> {
-		const { funcionId: funcId, tipoFunId: tipoId, parameters } = eventObject;
-		let result = await fetch(`${import.meta.env.VITE_API_URL}/nexo-api/${funcId}/${tipoId}`, {
+		const { funcionId: functionId, tipoFunId: tipoId, parameters } = eventObject;
+		if (this.apiUrl === undefined) {
+			error('No se ha definido la URL de la API');
+			throw new Error('No se ha definido la URL de la API');
+		}
+		const result = await fetch(`${this.apiUrl}/nexo-api/${functionId}/${tipoId}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-				Charset: 'UTF-8',
+				Charset: 'utf8',
 			},
-		}).then((response: Response) => response.json() as Promise<any>);
+		}).then((response: Response) => response.json());
 
 		debug('funciones result: ', JSON.stringify(result), eventObject);
 
@@ -76,7 +78,11 @@ export class ActionLibrary extends ActionAbstract {
 	}
 
 	public async middleCallService(app: string, name: string): Promise<Response> {
-		return await fetch(`${import.meta.env.VITE_API_URL}/schemas/${app}/${name}`, { method: 'GET' });
+		if (this.apiUrl === undefined) {
+			error('No se ha definido la URL de la API');
+			throw new Error('No se ha definido la URL de la API');
+		}
+		return await fetch(`${this.apiUrl}/schemas/${app}/${name}`, { method: 'GET' });
 	}
 }
 
@@ -88,14 +94,14 @@ function _getAccionesDialogo<T>({
 	codTransaction: string;
 	codApp: string;
 }): Promise<GlobalResponseTypes<T>> {
-	let method = {
+	const method = {
 		ok: true,
 		data: {
 			method: [''],
 		},
 	};
-	switch (parseInt(funcionId as string, 10)) {
-		case 10128: {
+	switch (Number.parseInt(funcionId as string, 10)) {
+		case 10_128: {
 			console.log('================');
 			console.log('actualizar datos');
 			console.log('================');
@@ -103,7 +109,7 @@ function _getAccionesDialogo<T>({
 			method.data.method = ['actualizar datos'];
 			break;
 		}
-		case 10003: {
+		case 10_003: {
 			console.log('================');
 			console.log('asociar mensajes');
 			console.log('================');
@@ -111,7 +117,7 @@ function _getAccionesDialogo<T>({
 			break;
 		}
 
-		case 10078: {
+		case 10_078: {
 			console.log('================');
 			console.log('parada de ejecucion');
 			console.log('================');
@@ -119,7 +125,7 @@ function _getAccionesDialogo<T>({
 			break;
 		}
 
-		case 10013: {
+		case 10_013: {
 			console.log('================');
 			console.log('generar mensajes');
 			console.log('================');
