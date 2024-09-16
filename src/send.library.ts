@@ -1,6 +1,4 @@
-import { InputObjectNew } from './types/mediator/dll-mediator.types';
-import { GlobalResponseTypes, SendObject } from './types/send.types';
-import { SendAbstract } from './types/send.abstract';
+import { GlobalResponseTypes, SendObject,InputObjectNew, SendAbstract } from './types';
 
 export class SendLibrary extends SendAbstract {
 	public async sendProcess<T>(inputObject: SendObject): Promise<GlobalResponseTypes<T>> {
