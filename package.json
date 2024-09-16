@@ -9,18 +9,19 @@
 	"exports": {
 		".": {
 			"import": "./dist/actions.es.js",
-			"require": "./dist/actions.cjs.js"
+			"require": "./dist/actions.cjs.js",
+			"types": "./dist/actions.d.ts"
 		}
 	},
 	"main": "dist/actions.cjs.js",
 	"module": "dist/actions.es.js",
-	"types": "dist/types/actions.d.ts",
+	"types": "dist/actions.d.ts",
 	"files": [
 		"dist",
 		"package.json"
 	],
 	"scripts": {
-		"build": "vite build && tsc && rollup -c rollup.config.mjs",
+		"build": "tsc && vite build && rollup -c rollup.config.mjs",
 		"buildAndChangelog": "npm run build && npm run changelog",
 		"changelog": "npx conventional-changelog -p angular -i ./CHANGELOG.md -s -r 0",
 		"check": "prettier . --check",
