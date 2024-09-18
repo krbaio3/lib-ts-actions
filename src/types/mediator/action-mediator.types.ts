@@ -1,4 +1,4 @@
-import { ActionMediatorAbstract } from './action-mediator.abstract';
+import {type ActionMediatorAbstract} from './action-mediator.abstract';
 
 export type InputMiddleObject = {
 	nameMethod: string;

@@ -1,5 +1,5 @@
-import { DllMediatorAbstract } from './dll-mediator.abstract';
-import { GlobalResponseTypes } from '../send.types';
+import {type DllMediatorAbstract} from './dll-mediator.abstract';
+import {type GlobalResponseTypes} from '../send.types';
 
 export type InputObject = {
 	dllId: string | number;

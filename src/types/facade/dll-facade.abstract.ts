@@ -1,5 +1,5 @@
-import { InputObject, InputObjectNew } from '../mediator';
-import { GlobalResponseTypes } from '../send.types';
+import {type InputObject, type InputObjectNew} from '../mediator';
+import {type GlobalResponseTypes} from '../send.types';
 
 export abstract class DllFacadeAbstract {
 	public abstract envio<T>(inputObject: InputObject): Promise<GlobalResponseTypes<T>>;

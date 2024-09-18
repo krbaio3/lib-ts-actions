@@ -1,4 +1,4 @@
-import { ActionObject, GlobalResponseTypes } from './send.types';
+import {type ActionObject, type GlobalResponseTypes} from './send.types';
 
 export abstract class ActionAbstract {
 	public readonly apiUrl: string;

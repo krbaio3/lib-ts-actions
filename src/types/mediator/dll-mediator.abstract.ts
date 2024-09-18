@@ -1,5 +1,5 @@
-import { InputObject } from './dll-mediator.types';
-import { GlobalResponseTypes } from '../send.types';
+import {type InputObject} from './dll-mediator.types';
+import {type GlobalResponseTypes} from '../send.types';
 
 export abstract class DllMediatorAbstract {
 	public abstract proceso<T>(inputObject: InputObject): Promise<GlobalResponseTypes<T>>;

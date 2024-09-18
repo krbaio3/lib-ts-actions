@@ -1,9 +1,10 @@
-export type SendObject = { codApp: string; codTransaction: string };
+export type SendObject = {codApp: string; codTransaction: string};
 export type ActionObject = {
 	nameMethod: string;
 	secuenciaId: string;
 	funcionId: string;
 	tipoFunIdMethod: string;
+	controlId: string;
 	tipoFunId?: string;
 	codTransaction?: string;
 	codApp?: string;

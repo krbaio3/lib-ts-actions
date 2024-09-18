@@ -1,5 +1,5 @@
-import { GlobalResponseTypes, SendObject } from './send.types';
-import { InputObjectNew } from './mediator';
+import {type GlobalResponseTypes, type SendObject} from './send.types';
+import {type InputObjectNew} from './mediator';
 
 export abstract class SendAbstract {
 	public readonly apiUrl: string;
