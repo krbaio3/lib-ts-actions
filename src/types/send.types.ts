@@ -13,9 +13,30 @@ export type ActionObject = {
 };
 
 export type SequenceForEvent = {
+	secuencia_id: number;
+	dialogo_id: number;
+	control_id: number;
+	evento: number;
+	funcion_id: number;
+	parametros: string;
+	tipo_fun_id: number;
+	orden: number;
+	variable_salida: number;
+	evento_id: number;
+	ambito: undefined;
 	nodo_id: number;
 	tipo_id: number;
-	node_parametros: string;
+	comp_id: number;
+	pos_x: number;
+	pos_y: number;
+};
+
+export type NextSecuence = SequenceForEvent & {
+	secuenciaIdFrom: number;
+	// Este campo es para hacer el navigateTo
+	secuenciaIdTo: number;
+	// Si tipo_id es 10 es evento secuencia
+	tipoId: string;
 };
 
 export type GlobalResponseTypes<T> = {

@@ -5,6 +5,7 @@ export type InputMiddleObject = {
 	secuenciaId: string;
 	funcionId: string;
 	tipoFunIdMethod: string;
+	controlId?: string;
 	tipoFunId?: string;
 	codTransaction?: string;
 	codApp?: string;

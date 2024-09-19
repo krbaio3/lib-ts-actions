@@ -2,6 +2,7 @@ import {
 	type ActionObject, type GlobalResponseTypes, type SequenceForEvent, ActionAbstract,
 } from './types';
 import {debug, error} from '@codespartan/lib-ts-core';
+import { getAccionesDialogo } from './action-dialog.library';
 
 /**
  * @description Clase que implementa la lógica de las acciones de la librería.
@@ -56,7 +57,7 @@ export class ActionLibrary extends ActionAbstract {
 	public async accionesDialog<T>(eventObject: ActionObject): Promise<GlobalResponseTypes<T>> {
 		debug('accionesDialog: ', JSON.stringify(eventObject));
 		const {funcionId, codTransaction, codApp} = eventObject;
-		return _getAccionesDialogo<T>({
+		return getAccionesDialogo<T>({
 			funcionId,
 			codTransaction: codTransaction!,
 			codApp: codApp!,
@@ -101,8 +102,9 @@ export class ActionLibrary extends ActionAbstract {
 
 		result.data = result.data.map((item: SequenceForEvent) => ({
 			...item,
-			parametros: item.node_parametros?.split(':'),
-			node_parametros: undefined,
+			secuenciaIdFrom: item.secuencia_id,
+			secuenciaIdTo: item.comp_id,
+			tipoId: item.tipo_id,
 		}));
 		debug('eventosSec result: ', JSON.stringify(result));
 		return result;
@@ -154,84 +156,4 @@ export class ActionLibrary extends ActionAbstract {
 
 		return fetch(`${this.apiUrl}/schemas/${app}/${name}`, {method: 'GET'});
 	}
-}
-
-// TODO: Sacar a un fichero aparte
-
-/**
- * @description Obtiene las acciones de diálogo
- * @param {string} funcionId
- * @param {string} codTransaction
- * @param {string} codApp
- * @returns {Promise<GlobalResponseTypes<T>>}
- */
-async function _getAccionesDialogo<T>({
-	funcionId,
-}: {
-	funcionId: string | number;
-	codTransaction: string;
-	codApp: string;
-}): Promise<GlobalResponseTypes<T>> {
-	const method: GlobalResponseTypes<any> = {
-		ok: true,
-		data: {
-			method: [''],
-		},
-	};
-	switch (Number.parseInt(funcionId as string, 10)) {
-		case 10_003: {
-			debug('===================');
-			debug('asociación múltiple');
-			debug('===================');
-			method.data.method = ['asociar mensajes'];
-			break;
-		}
-
-		case 10_013: {
-			debug('================');
-			debug('generar mensajes');
-			debug('================');
-			method.data.method = ['generar mensajes'];
-			break;
-		}
-
-		case 10_016: {
-			debug('================');
-			debug('generar mensajes');
-			debug('================');
-			method.data.method = ['generar mensajes'];
-			break;
-		}
-
-		case 10_078: {
-			debug('================');
-			debug('parada de ejecucion');
-			debug('================');
-			method.data.method = ['parada de ejecucion'];
-			break;
-		}
-
-		case 10_128: {
-			debug('================');
-			debug('actualizar datos');
-			debug('================');
-			// TODO: ver cómo sacar los datos a actualizar
-			method.data.method = ['actualizar datos'];
-			break;
-		}
-
-		default: {
-			debug('===================');
-			debug('Caso no contemplado');
-			debug('===================');
-			method.data.method = ['caso no contemplado: ' + funcionId];
-			break;
-		}
-	}
-
-	return new Promise(resolve => {
-		setTimeout(() => {
-			resolve(method);
-		}, 500);
-	});
 }
