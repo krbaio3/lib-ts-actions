@@ -1,6 +1,6 @@
 {
 	"name": "@codespartan/lib-ts-actions",
-	"version": "0.4.0",
+	"version": "0.4.1",
 	"description": "Librería que contiene las acciones para el proyecto M50 en Typescript",
 	"keywords": [],
 	"license": "ISC",
@@ -44,7 +44,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"dependencies": {
-		"@codespartan/lib-ts-core": "0.3.3"
+		"@codespartan/lib-ts-core": "0.3.4"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.5.0",
@@ -53,8 +53,8 @@
 		"@eslint/js": "^10.0.0",
 		"@stylistic/eslint-plugin": "^2.8.0",
 		"@types/eslint": "^9.6.1",
-		"@types/eslint__js": "^8.42.3",
 		"@types/eslint-config-prettier": "^6.11.3",
+		"@types/eslint__js": "^8.42.3",
 		"@types/jest": "^29.5.12",
 		"@types/node": "^22.5.4",
 		"@typescript-eslint/eslint-plugin": "^8.5.0",
@@ -89,6 +89,9 @@
 	},
 	"peerDependencies": {
 		"@codespartan/lib-ts-core": "0.3.3"
+	},
+	"publishConfig": {
+		"registry": "http://localhost:4873"
 	},
 	"engines": {
 		"node": ">=18.0.0",
