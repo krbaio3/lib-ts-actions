@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.2](https://github.com/krbaio3/lib-ts-actions/compare/v0.4.1...v0.4.2) (2024-09-25)
+
+
+### Bug Fixes
+
+* Readme ([3b3ecd0](https://github.com/krbaio3/lib-ts-actions/commit/3b3ecd04496214cb20336d57410440acd5178611))
+
 ### [0.4.1](https://github.com/krbaio3/lib-ts-actions/compare/v0.4.0...v0.4.1) (2024-09-23)
 
 
