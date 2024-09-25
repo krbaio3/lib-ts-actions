@@ -7,7 +7,6 @@ import {debug} from '@codespartan/lib-ts-core';
  * un evento no visualizable (tabla eventos_sec) una funcion de la tabla nexo_api o un evento
  * de la tabla eventos
  * @param {string} codTransaction Es el codigo de Transaccion
- * @param {string} codApp Es el codigo de la aplicacion
  * @returns {Promise<GlobalResponseTypes<T>>} Retorna un objeto con la respuesta de la petición
  */
 export async function getAccionesDialogo<T>({
@@ -19,16 +18,24 @@ export async function getAccionesDialogo<T>({
 }): Promise<GlobalResponseTypes<T>> {
 	const method: GlobalResponseTypes<any> = {
 		ok: true,
-		data: {
-			method: [''],
-		},
+		data: [
+			{method: ['']},
+		],
 	};
 	switch (Number.parseInt(funcionId as string, 10)) {
 		case 10_003: {
 			debug('===================');
 			debug('asociación múltiple');
 			debug('===================');
-			method.data.method = ['asociar mensajes'];
+			method.data[0].method = ['asociar mensajes'];
+			break;
+		}
+
+		case 10_002: {
+			debug('===================');
+			debug('acción de dialogo');
+			debug('===================');
+			method.data[0].method = ['salir'];
 			break;
 		}
 
@@ -36,7 +43,7 @@ export async function getAccionesDialogo<T>({
 			debug('================');
 			debug('generar mensajes');
 			debug('================');
-			method.data.method = ['generar mensajes'];
+			method.data[0].method = ['generar mensajes'];
 			break;
 		}
 
@@ -44,7 +51,7 @@ export async function getAccionesDialogo<T>({
 			debug('================');
 			debug('generar mensajes');
 			debug('================');
-			method.data.method = ['generar mensajes'];
+			method.data[0].method = ['generar mensajes'];
 			break;
 		}
 
@@ -52,7 +59,7 @@ export async function getAccionesDialogo<T>({
 			debug('================');
 			debug('parada de ejecucion');
 			debug('================');
-			method.data.method = ['parada de ejecucion'];
+			method.data[0].method = ['parada de ejecucion'];
 			break;
 		}
 
@@ -61,7 +68,7 @@ export async function getAccionesDialogo<T>({
 			debug('actualizar datos');
 			debug('================');
 			// TODO: ver cómo sacar los datos a actualizar
-			method.data.method = ['actualizar datos'];
+			method.data[0].method = ['actualizar datos'];
 			break;
 		}
 
@@ -69,7 +76,7 @@ export async function getAccionesDialogo<T>({
 			debug('===================');
 			debug('Caso no contemplado');
 			debug('===================');
-			method.data.method = ['caso no contemplado: ' + funcionId];
+			method.data[0].method = ['caso no contemplado: ' + funcionId];
 			break;
 		}
 	}

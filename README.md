@@ -5,15 +5,7 @@ A simple library built with TypeScript.
 ## Installation
 
 ```bash
-npm install my-ts-library
-```
-
-## Usage
-
-```typescript
-import { greet } from 'my-ts-library';
-
-console.log(greet('World')); // Outputs: Hello, World!
+npm install @codespartan/lib-ts-actions
 ```
 
 ## Ejecutar scripts
