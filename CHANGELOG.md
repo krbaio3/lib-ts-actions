@@ -2,7 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [0.4.3](https://github.com/krbaio3/lib-ts-actions/compare/v0.4.2...v0.4.3) (2024-09-25)
+## [0.5.0](https://github.com/krbaio3/lib-ts-actions/compare/v0.4.3...v0.5.0) (2024-09-26)
+
+
+### Bug Fixes
+
+* Tratamiento de respuesta en eventosSec. Se cambia la query ([a233bb9](https://github.com/krbaio3/lib-ts-actions/commit/a233bb9d0130e6a988fc6e0580ea30a9084a515b))
+
+## [0.4.3](https://github.com/krbaio3/lib-ts-actions/compare/v0.4.2...v0.4.3) (2024-09-25)
+
+
 
 ## [0.4.2](https://github.com/krbaio3/lib-ts-actions/compare/v0.4.1...v0.4.2) (2024-09-25)
 
