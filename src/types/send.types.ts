@@ -40,7 +40,7 @@ export type NextSecuence = SequenceForEvent & {
 };
 
 export type GlobalResponseTypes<T> = {
-	data: T | [];
+	data: T | T[];
 	ok: boolean;
 	error?: {
 		message: string;

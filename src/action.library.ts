@@ -1,7 +1,5 @@
-import {
-	type ActionObject, type GlobalResponseTypes, type SequenceForEvent, ActionAbstract,
-} from './types';
-import {debug, error} from '@codespartan/lib-ts-core';
+import { type ActionObject, type GlobalResponseTypes, type SequenceForEvent, ActionAbstract } from './types';
+import { debug, error } from '@codespartan/lib-ts-core';
 import { getAccionesDialogo } from './action-dialog.library';
 
 /**
@@ -56,7 +54,7 @@ export class ActionLibrary extends ActionAbstract {
 	 */
 	public async accionesDialog<T>(eventObject: ActionObject): Promise<GlobalResponseTypes<T>> {
 		debug('accionesDialog: ', JSON.stringify(eventObject));
-		const {funcionId, codTransaction, codApp} = eventObject;
+		const { funcionId, codTransaction, codApp } = eventObject;
 		return getAccionesDialogo<T>({
 			funcionId,
 			codTransaction: codTransaction!,
@@ -85,28 +83,33 @@ export class ActionLibrary extends ActionAbstract {
 		//         "funcionId": "Si es menor a 10_000, se refiere a un nodo de la secuencia, si es mayor, es un  evento de la secuencia no visualizable
 		//         "tipoFunId": "Nos indica el tipo de funcion a la que hay que llamar"
 		//   },
-		const {secuenciaId, dialogoId, controlId} = eventObject;
+		const { secuenciaId, dialogoId, controlId } = eventObject;
 		debug('eventosSec: ', JSON.stringify(eventObject));
 		if (this.apiUrl === undefined) {
 			error('No se ha definido la URL de la API');
 			throw new Error('No se ha definido la URL de la API');
 		}
 
-		const result = await fetch(`${this.apiUrl}/nodo/${secuenciaId}/${dialogoId}/${controlId}`, {
+		const result: GlobalResponseTypes<T> = await fetch(`${this.apiUrl}/nodo/${secuenciaId}/${dialogoId}/${controlId}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
 				Charset: 'utf8',
 			},
-		}).then(async response => response.json());
+		}).then(async response => (await response.json()) as Promise<GlobalResponseTypes<T>>);
 
-		result.data = result.data.map((item: SequenceForEvent) => ({
+		result.data = (result?.data as any[]).map((item: SequenceForEvent) => ({
 			...item,
 			secuenciaIdFrom: item.secuencia_id,
 			secuenciaIdTo: item.comp_id,
 			tipoId: item.tipo_id,
-		}));
+		})) as T[];
 		debug('eventosSec result: ', JSON.stringify(result));
+
+		if (result.data.length > 1) {
+			result.data = result.data.filter(item => (item as SequenceForEvent).tipo_id === 10);
+		}
+
 		return result;
 	}
 
@@ -116,7 +119,7 @@ export class ActionLibrary extends ActionAbstract {
 	 * @returns {Promise<GlobalResponseTypes<NexoApiObject>>}
 	 */
 	public async funciones<NexoApiObject>(eventObject: ActionObject): Promise<GlobalResponseTypes<NexoApiObject>> {
-		const {funcionId: functionId, tipoFunId: tipoId, parameters} = eventObject;
+		const { funcionId: functionId, tipoFunId: tipoId, parameters } = eventObject;
 		if (this.apiUrl === undefined) {
 			error('No se ha definido la URL de la API');
 			throw new Error('No se ha definido la URL de la API');
@@ -130,11 +133,11 @@ export class ActionLibrary extends ActionAbstract {
 				'Content-Type': 'application/json',
 				Charset: 'utf8',
 			},
-		}).then(async (response: Response) => response.json());
+		}).then(async response => (await response.json()) as Promise<GlobalResponseTypes<NexoApiObject>>);
 
 		debug('funciones result: ', JSON.stringify(result), eventObject);
 
-		result.data = result.data.map((item: NexoApiObject) => ({
+		result.data = (result?.data as any[]).map((item: NexoApiObject) => ({
 			...item,
 			parametros: parameters?.split(':'),
 		}));
@@ -154,6 +157,6 @@ export class ActionLibrary extends ActionAbstract {
 			throw new Error('No se ha definido la URL de la API');
 		}
 
-		return fetch(`${this.apiUrl}/schemas/${app}/${name}`, {method: 'GET'});
+		return fetch(`${this.apiUrl}/schemas/${app}/${name}`, { method: 'GET' });
 	}
 }

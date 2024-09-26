@@ -23,19 +23,19 @@ export async function getAccionesDialogo<T>({
 		],
 	};
 	switch (Number.parseInt(funcionId as string, 10)) {
-		case 10_003: {
-			debug('===================');
-			debug('asociación múltiple');
-			debug('===================');
-			method.data[0].method = ['asociar mensajes'];
-			break;
-		}
-
 		case 10_002: {
 			debug('===================');
 			debug('acción de dialogo');
 			debug('===================');
 			method.data[0].method = ['salir'];
+			break;
+		}
+
+		case 10_003: {
+			debug('===================');
+			debug('asociación múltiple');
+			debug('===================');
+			method.data[0].method = ['asociar mensajes'];
 			break;
 		}
 
