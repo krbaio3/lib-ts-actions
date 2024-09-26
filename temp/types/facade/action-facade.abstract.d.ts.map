@@ -1,1 +1,0 @@
-{"version":3,"file":"action-facade.abstract.d.ts","sourceRoot":"","sources":["../../../src/types/facade/action-facade.abstract.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,KAAK,iBAAiB,EAAC,MAAM,aAAa,CAAC;AACnD,OAAO,EAAC,KAAK,mBAAmB,EAAC,MAAM,eAAe,CAAC;AAEvD,8BAAsB,oBAAoB;aACzB,IAAI,CAAC,CAAC,EAAE,WAAW,EAAE,iBAAiB,GAAG,OAAO,CAAC,mBAAmB,CAAC,CAAC,CAAC,CAAC;CACxF"}

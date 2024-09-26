@@ -98,17 +98,7 @@ export class ActionLibrary extends ActionAbstract {
 			},
 		}).then(async response => (await response.json()) as Promise<GlobalResponseTypes<T>>);
 
-		result.data = (result?.data as any[]).map((item: SequenceForEvent) => ({
-			...item,
-			secuenciaIdFrom: item.secuencia_id,
-			secuenciaIdTo: item.comp_id,
-			tipoId: item.tipo_id,
-		})) as T[];
 		debug('eventosSec result: ', JSON.stringify(result));
-
-		if (result.data.length > 1) {
-			result.data = result.data.filter(item => (item as SequenceForEvent).tipo_id === 10);
-		}
 
 		return result;
 	}

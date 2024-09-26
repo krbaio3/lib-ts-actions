@@ -1,5 +1,5 @@
-import {type GlobalResponseTypes} from './types';
-import {debug} from '@codespartan/lib-ts-core';
+import { type GlobalResponseTypes } from './types';
+import { debug } from '@codespartan/lib-ts-core';
 
 /**
  * @description Obtiene las acciones de diálogo
@@ -18,9 +18,7 @@ export async function getAccionesDialogo<T>({
 }): Promise<GlobalResponseTypes<T>> {
 	const method: GlobalResponseTypes<any> = {
 		ok: true,
-		data: [
-			{method: ['']},
-		],
+		data: [{ method: [''] }],
 	};
 	switch (Number.parseInt(funcionId as string, 10)) {
 		case 10_002: {
@@ -35,6 +33,14 @@ export async function getAccionesDialogo<T>({
 			debug('===================');
 			debug('asociación múltiple');
 			debug('===================');
+			method.data[0].method = ['asociar mensajes'];
+			break;
+		}
+
+		case 10_008: {
+			debug('====================');
+			debug('Act. y Val. de datos');
+			debug('====================');
 			method.data[0].method = ['asociar mensajes'];
 			break;
 		}

@@ -1,10 +1,8 @@
-import {
-	type GlobalResponseTypes, type SendObject, type InputObjectNew, SendAbstract,
-} from './types';
+import { type GlobalResponseTypes, type SendObject, type InputObjectNew, SendAbstract } from './types';
 
 export class SendLibrary extends SendAbstract {
 	public async sendProcess<T>(inputObject: SendObject): Promise<GlobalResponseTypes<T>> {
-		const {codApp, codTransaction} = inputObject;
+		const { codApp, codTransaction } = inputObject;
 
 		const body = JSON.stringify({
 			CONTINUAR: ' ',
@@ -16,7 +14,7 @@ export class SendLibrary extends SendAbstract {
 				'Content-Type': 'application/json',
 			},
 			body,
-		}).then(async response => response.json());
+		}).then(async response => (await response.json()) as Promise<GlobalResponseTypes<T>>);
 	}
 
 	/**
@@ -26,7 +24,7 @@ export class SendLibrary extends SendAbstract {
 	 * @returns {Promise<GlobalResponseTypes<T>>}
 	 */
 	public async execProcess<T>(inputObject: InputObjectNew): Promise<GlobalResponseTypes<T>> {
-		const {method, dllId, params} = inputObject;
+		const { method, dllId, params } = inputObject;
 
 		const body = JSON.stringify({
 			method,
@@ -41,6 +39,6 @@ export class SendLibrary extends SendAbstract {
 				'Content-Type': 'application/json',
 			},
 			body,
-		}).then(async response => response.json());
+		}).then(async response => (await response.json()) as Promise<GlobalResponseTypes<T>>);
 	}
 }
