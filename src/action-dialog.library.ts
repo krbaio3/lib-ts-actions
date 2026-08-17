@@ -87,7 +87,7 @@ export async function getAccionesDialogo<T>({
 		}
 	}
 
-	return new Promise(resolve => {
+	return new Promise((resolve) => {
 		// SetTimeout(() => {
 		resolve(method);
 		// }, 500);

@@ -4,7 +4,7 @@ export class NamPlusLibrary {
 		return new Promise(resolve => {
 			setTimeout(() => {
 				resolve(`Detalles asíncronos para la condición ${conditionId}`);
-			}, 1000); // Simula un retraso de 1 segundo
+			}, 0); // Simula un retraso de 1 segundo
 		});
 	}
 }
